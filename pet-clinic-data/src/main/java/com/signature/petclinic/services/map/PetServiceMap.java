@@ -1,11 +1,11 @@
 package com.signature.petclinic.services.map;
 
 import com.signature.petclinic.model.Pet;
-import com.signature.petclinic.services.CurdService;
+import com.signature.petclinic.services.PetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CurdService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     
     @Override
     public Pet save(Pet entity) {
