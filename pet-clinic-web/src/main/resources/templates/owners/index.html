@@ -2,9 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Owners - Pet Clinic</title>
+
+    <style>
+        table {
+            border: 2px solid lightsteelblue;
+        }
+    </style>
 </head>
 <body>
     <h1 th:text="'List of all pet owners'">Owners...</h1>
+
+    <table border="2">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="owner : ${owners}">
+                <td th:text="${owner.id}"></td>
+                <td th:text="${owner.firstName}"></td>
+                <td th:text="${owner.lastName}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
