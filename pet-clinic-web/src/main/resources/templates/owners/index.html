@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Owners - Pet Clinic</title>
-
-    <style>
-        table {
-            border: 2px solid lightsteelblue;
-        }
-    </style>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{components/layout :: layout(~{::body}, 'owners')}">
 <body>
-    <h1 th:text="'List of all pet owners'">Owners...</h1>
-
-    <table th:border="2">
+<!--/*@thymesVar id="owner" type="com.signature.petclinic.model.Owner"*/-->
+    <h2>Owners</h2>
+    <table id="owners" class="table table-striped">
         <thead>
             <tr>
-                <td>ID</td>
-                <td>First Name</td>
-                <td>Last Name</td>
+                <th style="width: 150px;">ID</th>
+                <th style="width: 200px;">First Name</th>
+                <th style="width: 120px">Last Name</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="owner : ${owners}">
-                <td th:text="${owner.id}"></td>
+                <td>
+                    <a th:href="@{/owner/__${owner.id}__}" th:text="${owner.id}"></a>
+                </td>
                 <td th:text="${owner.firstName}"></td>
                 <td th:text="${owner.lastName}"></td>
             </tr>
