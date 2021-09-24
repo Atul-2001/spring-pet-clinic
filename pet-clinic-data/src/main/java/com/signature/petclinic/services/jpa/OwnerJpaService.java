@@ -12,11 +12,11 @@ import java.util.stream.StreamSupport;
 
 @Service
 @Profile("spring-data-jpa")
-public class OwnerServiceJPA implements OwnerService {
+public class OwnerJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
 
-    public OwnerServiceJPA(OwnerRepository ownerRepository) {
+    public OwnerJpaService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
     }
 

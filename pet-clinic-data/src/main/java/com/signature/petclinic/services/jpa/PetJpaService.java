@@ -12,11 +12,11 @@ import java.util.stream.StreamSupport;
 
 @Service
 @Profile("spring-data-jpa")
-public class PetServiceJPA implements PetService {
+public class PetJpaService implements PetService {
 
     private final PetRepository petRepository;
 
-    public PetServiceJPA(PetRepository petRepository) {
+    public PetJpaService(PetRepository petRepository) {
         this.petRepository = petRepository;
     }
 
