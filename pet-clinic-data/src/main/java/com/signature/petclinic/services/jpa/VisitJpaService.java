@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-@Profile("spring-data-jap")
+@Profile("spring-data-jpa")
 public class VisitJpaService implements VisitService {
 
     private final VisitRepository visitRepository;
