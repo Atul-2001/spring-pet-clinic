@@ -1,10 +1,7 @@
 package com.signature.petclinic.bootstrap;
 
 import com.signature.petclinic.model.*;
-import com.signature.petclinic.services.OwnerService;
-import com.signature.petclinic.services.PetTypeService;
-import com.signature.petclinic.services.SpecialityService;
-import com.signature.petclinic.services.VetService;
+import com.signature.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -51,6 +50,12 @@ public class DataLoader implements CommandLineRunner {
         owner.getPets().add(yashPet);
         ownerService.save(owner);
 
+        Visit visit = new Visit();
+        visit.setPet(yashPet);
+        visit.setDate(LocalDate.now());
+        visit.setDescription("Sneeze dog");
+        visitService.save(visit);
+
         owner = new Owner();
         owner.setFirstName("Abhi");
         owner.setLastName("Singh");
@@ -66,6 +71,12 @@ public class DataLoader implements CommandLineRunner {
 
         owner.getPets().add(abhiCat);
         ownerService.save(owner);
+
+        visit = new Visit();
+        visit.setPet(abhiCat);
+        visit.setDate(LocalDate.now());
+        visit.setDescription("Sneeze cat");
+        visitService.save(visit);
         System.out.println("Owners list loaded successfully...");
 
         Speciality radiology = new Speciality();
