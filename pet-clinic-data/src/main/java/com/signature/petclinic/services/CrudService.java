@@ -2,7 +2,7 @@ package com.signature.petclinic.services;
 
 import java.util.Set;
 
-public interface CurdService<T, ID> {
+public interface CrudService<T, ID> {
 
     T save(T entity);
 
