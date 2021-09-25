@@ -26,20 +26,19 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        PetType dog = new PetType();
-        dog.setName("Dog");
+        PetType dog = PetType.builder().name("Dog").build();
         PetType savedDog = petTypeService.save(dog);
 
-        PetType cat = new PetType();
-        cat.setName("Cat");
+        PetType cat = PetType.builder().name("Cat").build();
         PetType savedCat = petTypeService.save(cat);
 
-        Owner owner = new Owner();
-        owner.setFirstName("Yash");
-        owner.setLastName("Chopra");
-        owner.setAddress("civil lines");
-        owner.setCity("Prayagraj");
-        owner.setTelephone("6792754278");
+        Owner owner = Owner.builder()
+                .firstName("Yash")
+                .lastName("Chopra")
+                .address("Civil Lines")
+                .city("Prayagraj")
+                .telephone("6792754278")
+                .build();
 
         Pet yashPet = new Pet();
         yashPet.setPetType(savedDog);

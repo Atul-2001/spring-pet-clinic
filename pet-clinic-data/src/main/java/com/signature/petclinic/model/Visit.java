@@ -1,8 +1,16 @@
 package com.signature.petclinic.model;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
@@ -17,31 +25,17 @@ public class Visit extends BaseEntity {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    public Visit() {
-        this.date = LocalDate.now();
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
+    public Visit(Long id, LocalDate date, String description) {
+        super(id);
         this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
+    @Builder
+    public Visit(Long id, LocalDate date, String description, Pet pet) {
+        super(id);
+        this.date = date;
+        this.description = description;
         this.pet = pet;
     }
 }

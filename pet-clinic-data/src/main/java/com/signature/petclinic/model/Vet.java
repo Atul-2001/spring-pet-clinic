@@ -1,9 +1,16 @@
 package com.signature.petclinic.model;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "vets")
 public class Vet extends Person {
@@ -20,12 +27,9 @@ public class Vet extends Person {
         this.specialities = new HashSet<>();
     }
 
-    public Set<Speciality> getSpecialities() {
-        return specialities;
+    @Builder
+    public Vet(Long id, String firstName, String lastName, Set<Speciality> specialities) {
+        super(id, firstName, lastName);
+        this.specialities = Objects.requireNonNullElseGet(specialities, HashSet::new);
     }
-
-    public void setSpecialities(Set<Speciality> specialities) {
-        this.specialities = specialities;
-    }
-
 }

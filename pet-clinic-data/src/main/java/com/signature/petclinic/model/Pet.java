@@ -1,10 +1,17 @@
 package com.signature.petclinic.model;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "pets")
 public class Pet extends BaseEntity {
@@ -30,43 +37,19 @@ public class Pet extends BaseEntity {
         this.visits = new HashSet<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    @Builder
+    public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthdate, Set<Visit> visits) {
+        super(id);
         this.name = name;
-    }
-
-    public PetType getPetType() {
-        return petType;
-    }
-
-    public void setPetType(PetType petType) {
         this.petType = petType;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
         this.owner = owner;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
+        this.visits = Objects.requireNonNullElseGet(visits, HashSet::new);
     }
 
-    public Set<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Set<Visit> visits) {
-        this.visits = visits;
+    public Pet addVisit(Visit visit) {
+        visit.setPet(this);
+        this.visits.add(visit);
+        return this;
     }
 }
