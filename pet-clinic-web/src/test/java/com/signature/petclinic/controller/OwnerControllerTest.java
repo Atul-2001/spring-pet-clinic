@@ -14,7 +14,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -49,9 +52,9 @@ class OwnerControllerTest {
     when(ownerService.findAll()).thenReturn(owners);
 
     mockMvc.perform(get("/owners"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/index"))
-            .andExpect(model().attribute("owners", hasSize(2)));
+      .andExpect(status().isOk())
+      .andExpect(view().name("owners/index"))
+      .andExpect(model().attribute("owners", hasSize(2)));
   }
 
   @Test
@@ -59,9 +62,9 @@ class OwnerControllerTest {
     when(ownerService.findAll()).thenReturn(owners);
 
     mockMvc.perform(get("/owners/"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/index"))
-            .andExpect(model().attribute("owners", hasSize(2)));
+      .andExpect(status().isOk())
+      .andExpect(view().name("owners/index"))
+      .andExpect(model().attribute("owners", hasSize(2)));
   }
 
   @Test
@@ -69,9 +72,9 @@ class OwnerControllerTest {
     when(ownerService.findAll()).thenReturn(owners);
 
     mockMvc.perform(get("/owners/index"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/index"))
-            .andExpect(model().attribute("owners", hasSize(2)));
+      .andExpect(status().isOk())
+      .andExpect(view().name("owners/index"))
+      .andExpect(model().attribute("owners", hasSize(2)));
   }
 
   @Test
@@ -79,17 +82,29 @@ class OwnerControllerTest {
     when(ownerService.findAll()).thenReturn(owners);
 
     mockMvc.perform(get("/owners/index.html"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("owners/index"))
-            .andExpect(model().attribute("owners", hasSize(2)));
+      .andExpect(status().isOk())
+      .andExpect(view().name("owners/index"))
+      .andExpect(model().attribute("owners", hasSize(2)));
   }
 
   @Test
   void getOwners() throws Exception {
     mockMvc.perform(get("/owners/find"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("not_implemented"));
+      .andExpect(status().isOk())
+      .andExpect(view().name("not_implemented"));
 
     verifyNoInteractions(ownerService);
+  }
+
+  @Test
+  void showOwner() throws Exception {
+    when(ownerService.findById(anyLong()))
+      .thenReturn(Owner.builder().id(1L).build());
+
+    mockMvc.perform(get("/owners/1"))
+      .andExpect(status().isOk())
+      .andExpect(view().name("owners/detail"))
+      .andExpect(model().attribute("owner",
+        hasProperty("id", is(1L))));
   }
 }

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{components/layout :: layout(~{::body}, 'owners')}">
+<html lang="en" th:replace="~{components/layout :: layout(~{::body}, 'owners')}"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="owner" type="com.signature.petclinic.model.Owner"*/-->
-    <h2>Owners</h2>
-    <table id="owners" class="table table-striped">
-        <thead>
-            <tr>
-                <th style="width: 150px;">ID</th>
-                <th style="width: 200px;">First Name</th>
-                <th style="width: 120px">Last Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="owner : ${owners}">
-                <td>
-                    <a th:href="@{/owner/__${owner.id}__}" th:text="${owner.id}"></a>
-                </td>
-                <td th:text="${owner.firstName}"></td>
-                <td th:text="${owner.lastName}"></td>
-            </tr>
-        </tbody>
-    </table>
+<h2>Owners</h2>
+<table class="table table-striped" id="owners">
+    <thead>
+    <tr>
+        <th style="width: 150px;">ID</th>
+        <th style="width: 200px;">First Name</th>
+        <th style="width: 120px">Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="owner : ${owners}">
+        <td>
+            <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.id}"></a>
+        </td>
+        <td th:text="${owner.firstName}"></td>
+        <td th:text="${owner.lastName}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

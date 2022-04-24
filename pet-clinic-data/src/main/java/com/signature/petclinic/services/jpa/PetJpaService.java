@@ -14,35 +14,35 @@ import java.util.stream.StreamSupport;
 @Profile("spring-data-jpa")
 public class PetJpaService implements PetService {
 
-    private final PetRepository petRepository;
+  private final PetRepository petRepository;
 
-    public PetJpaService(PetRepository petRepository) {
-        this.petRepository = petRepository;
-    }
+  public PetJpaService(PetRepository petRepository) {
+    this.petRepository = petRepository;
+  }
 
-    @Override
-    public Pet save(Pet entity) {
-        return petRepository.save(entity);
-    }
+  @Override
+  public Pet save(Pet entity) {
+    return petRepository.save(entity);
+  }
 
-    @Override
-    public Pet findById(Long id) {
-        return petRepository.findById(id).orElse(null);
-    }
+  @Override
+  public Pet findById(Long id) {
+    return petRepository.findById(id).orElse(null);
+  }
 
-    @Override
-    public Set<Pet> findAll() {
-        return StreamSupport.stream(petRepository.findAll().spliterator(), false)
-                .collect(Collectors.toSet());
-    }
+  @Override
+  public Set<Pet> findAll() {
+    return StreamSupport.stream(petRepository.findAll().spliterator(), false)
+      .collect(Collectors.toSet());
+  }
 
-    @Override
-    public void deleteById(Long id) {
-        petRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Long id) {
+    petRepository.deleteById(id);
+  }
 
-    @Override
-    public void delete(Pet entity) {
-        petRepository.delete(entity);
-    }
+  @Override
+  public void delete(Pet entity) {
+    petRepository.delete(entity);
+  }
 }

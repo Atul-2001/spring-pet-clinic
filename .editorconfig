@@ -1,0 +1,19 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = false
+indent_style = space
+
+[*.{java,xml}]
+indent_size = 2
+trim_trailing_whitespace = true
+tab_width = 4
+
+[{pom,wro}.xml]
+indent_size = 4
+
+[*.{html,sql,less}]
+indent_size = 4

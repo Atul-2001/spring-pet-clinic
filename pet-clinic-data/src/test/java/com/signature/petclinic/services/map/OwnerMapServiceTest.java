@@ -11,23 +11,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class OwnerMapServiceTest {
 
-  private OwnerMapService ownerMapService;
-
   private final Long id1 = 1L;
   private final Long id2 = 2L;
   private final String firstName = "dummy";
   private final String lastName = "dump";
+  private OwnerMapService ownerMapService;
 
   @BeforeEach
   void setUp() {
-    this.ownerMapService = new OwnerMapService(new PetMapService(),new PetTypeMapService());
+    this.ownerMapService = new OwnerMapService(new PetMapService(), new PetTypeMapService());
     this.ownerMapService.save(Owner.builder().id(id1).firstName(firstName).lastName(lastName).build());
   }
 
   @Test
   void save() {
     Owner saved = ownerMapService.save(Owner.builder()
-            .id(id2).firstName("white").lastName("devil").build());
+      .id(id2).firstName("white").lastName("devil").build());
     assertNotNull(saved);
     assertEquals(id2, saved.getId());
   }

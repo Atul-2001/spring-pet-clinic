@@ -14,35 +14,35 @@ import java.util.stream.StreamSupport;
 @Profile("spring-data-jpa")
 public class SpecialityJpaService implements SpecialityService {
 
-    private final SpecialityRepository specialityRepository;
+  private final SpecialityRepository specialityRepository;
 
-    public SpecialityJpaService(SpecialityRepository specialityRepository) {
-        this.specialityRepository = specialityRepository;
-    }
+  public SpecialityJpaService(SpecialityRepository specialityRepository) {
+    this.specialityRepository = specialityRepository;
+  }
 
-    @Override
-    public Speciality save(Speciality entity) {
-        return specialityRepository.save(entity);
-    }
+  @Override
+  public Speciality save(Speciality entity) {
+    return specialityRepository.save(entity);
+  }
 
-    @Override
-    public Speciality findById(Long id) {
-        return specialityRepository.findById(id).orElse(null);
-    }
+  @Override
+  public Speciality findById(Long id) {
+    return specialityRepository.findById(id).orElse(null);
+  }
 
-    @Override
-    public Set<Speciality> findAll() {
-        return StreamSupport.stream(specialityRepository.findAll().spliterator(), false)
-                .collect(Collectors.toSet());
-    }
+  @Override
+  public Set<Speciality> findAll() {
+    return StreamSupport.stream(specialityRepository.findAll().spliterator(), false)
+      .collect(Collectors.toSet());
+  }
 
-    @Override
-    public void deleteById(Long id) {
-        specialityRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Long id) {
+    specialityRepository.deleteById(id);
+  }
 
-    @Override
-    public void delete(Speciality entity) {
-        specialityRepository.delete(entity);
-    }
+  @Override
+  public void delete(Speciality entity) {
+    specialityRepository.delete(entity);
+  }
 }

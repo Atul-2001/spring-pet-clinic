@@ -14,35 +14,35 @@ import java.util.stream.StreamSupport;
 @Profile("spring-data-jpa")
 public class PetTypeJpaService implements PetTypeService {
 
-    private final PetTypeRepository petTypeRepository;
+  private final PetTypeRepository petTypeRepository;
 
-    public PetTypeJpaService(PetTypeRepository petTypeRepository) {
-        this.petTypeRepository = petTypeRepository;
-    }
+  public PetTypeJpaService(PetTypeRepository petTypeRepository) {
+    this.petTypeRepository = petTypeRepository;
+  }
 
-    @Override
-    public PetType save(PetType entity) {
-        return petTypeRepository.save(entity);
-    }
+  @Override
+  public PetType save(PetType entity) {
+    return petTypeRepository.save(entity);
+  }
 
-    @Override
-    public PetType findById(Long id) {
-        return petTypeRepository.findById(id).orElse(null);
-    }
+  @Override
+  public PetType findById(Long id) {
+    return petTypeRepository.findById(id).orElse(null);
+  }
 
-    @Override
-    public Set<PetType> findAll() {
-        return StreamSupport.stream(petTypeRepository.findAll().spliterator(), false)
-                .collect(Collectors.toSet());
-    }
+  @Override
+  public Set<PetType> findAll() {
+    return StreamSupport.stream(petTypeRepository.findAll().spliterator(), false)
+      .collect(Collectors.toSet());
+  }
 
-    @Override
-    public void deleteById(Long id) {
-        petTypeRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Long id) {
+    petTypeRepository.deleteById(id);
+  }
 
-    @Override
-    public void delete(PetType entity) {
-        petTypeRepository.delete(entity);
-    }
+  @Override
+  public void delete(PetType entity) {
+    petTypeRepository.delete(entity);
+  }
 }

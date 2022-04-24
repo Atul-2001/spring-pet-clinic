@@ -13,46 +13,46 @@ import java.util.Set;
 @Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
-    private final SpecialityService specialityService;
+  private final SpecialityService specialityService;
 
-    public VetMapService(SpecialityService specialityService) {
-        this.specialityService = specialityService;
-    }
+  public VetMapService(SpecialityService specialityService) {
+    this.specialityService = specialityService;
+  }
 
-    @Override
-    public Vet save(Vet entity) {
-        if (entity == null) {
-            return null;
-        } else {
-            if (entity.getSpecialities() != null && entity.getSpecialities().size() > 0) {
-                entity.getSpecialities().forEach(speciality -> {
-                    if (speciality.getId() == null) {
-                        Speciality savedSpeciality = specialityService.save(speciality);
-                        speciality.setId(savedSpeciality.getId());
-                    }
-                });
-            }
-            return super.save(entity);
-        }
+  @Override
+  public Vet save(Vet entity) {
+    if (entity == null) {
+      return null;
+    } else {
+      if (entity.getSpecialities() != null && entity.getSpecialities().size() > 0) {
+        entity.getSpecialities().forEach(speciality -> {
+          if (speciality.getId() == null) {
+            Speciality savedSpeciality = specialityService.save(speciality);
+            speciality.setId(savedSpeciality.getId());
+          }
+        });
+      }
+      return super.save(entity);
     }
+  }
 
-    @Override
-    public Vet findById(Long id) {
-        return super.findById(id);
-    }
+  @Override
+  public Vet findById(Long id) {
+    return super.findById(id);
+  }
 
-    @Override
-    public Set<Vet> findAll() {
-        return super.findAll();
-    }
+  @Override
+  public Set<Vet> findAll() {
+    return super.findAll();
+  }
 
-    @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
+  @Override
+  public void deleteById(Long id) {
+    super.deleteById(id);
+  }
 
-    @Override
-    public void delete(Vet entity) {
-        super.delete(entity);
-    }
+  @Override
+  public void delete(Vet entity) {
+    super.delete(entity);
+  }
 }

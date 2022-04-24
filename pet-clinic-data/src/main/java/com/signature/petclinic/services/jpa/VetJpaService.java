@@ -14,35 +14,35 @@ import java.util.stream.StreamSupport;
 @Profile("spring-data-jpa")
 public class VetJpaService implements VetService {
 
-    private final VetRepository vetRepository;
+  private final VetRepository vetRepository;
 
-    public VetJpaService(VetRepository vetRepository) {
-        this.vetRepository = vetRepository;
-    }
+  public VetJpaService(VetRepository vetRepository) {
+    this.vetRepository = vetRepository;
+  }
 
-    @Override
-    public Vet save(Vet entity) {
-        return vetRepository.save(entity);
-    }
+  @Override
+  public Vet save(Vet entity) {
+    return vetRepository.save(entity);
+  }
 
-    @Override
-    public Vet findById(Long id) {
-        return vetRepository.findById(id).orElse(null);
-    }
+  @Override
+  public Vet findById(Long id) {
+    return vetRepository.findById(id).orElse(null);
+  }
 
-    @Override
-    public Set<Vet> findAll() {
-        return StreamSupport.stream(vetRepository.findAll().spliterator(), false)
-                .collect(Collectors.toSet());
-    }
+  @Override
+  public Set<Vet> findAll() {
+    return StreamSupport.stream(vetRepository.findAll().spliterator(), false)
+      .collect(Collectors.toSet());
+  }
 
-    @Override
-    public void deleteById(Long id) {
-        vetRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Long id) {
+    vetRepository.deleteById(id);
+  }
 
-    @Override
-    public void delete(Vet entity) {
-        vetRepository.delete(entity);
-    }
+  @Override
+  public void delete(Vet entity) {
+    vetRepository.delete(entity);
+  }
 }
