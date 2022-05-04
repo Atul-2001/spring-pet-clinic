@@ -29,7 +29,7 @@
 
     <a class="btn btn-primary" th:href="@{{id}/edit(id=${owner.id})}">Edit Owner</a>
 
-    <a class="btn btn-primary" th:href="@{{id}/pets/new(id=${owner.id})}">Add New Pet</a>
+    <a class="btn btn-primary" th:href="@{{id}/pets/add(id=${owner.id})}">Add New Pet</a>
 
     <br /><br /><br />
 
@@ -65,7 +65,7 @@
                                 Pet</a>
                         </td>
                         <td>
-                            <a th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                            <a th:href="@{{ownerId}/pets/{petId}/visits/add(ownerId=${owner.id},petId=${pet.id})}">Add
                                 Visit</a>
                         </td>
                     </tr>

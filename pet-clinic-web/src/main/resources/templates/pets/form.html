@@ -19,8 +19,8 @@
                 </div>
             </div>
             <input th:replace="~{components/input :: input ('Name', 'name', 'text')}" />
-            <input th:replace="~{components/input :: input ('Birth Date', 'birthDate', 'date')}" />
-            <input th:replace="~{components/input :: select ('Type', 'type', ${types})}" />
+            <input th:replace="~{components/input :: input ('Birth Date', 'birthdate', 'date')}" />
+            <input th:replace="~{components/select :: select ('Type', 'petType', ${types})}" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

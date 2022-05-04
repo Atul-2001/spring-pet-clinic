@@ -3,6 +3,7 @@ package com.signature.petclinic.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class Pet extends BaseEntity {
   private Owner owner;
 
   @Column(name = "birth_date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate birthdate;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
