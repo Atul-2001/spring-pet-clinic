@@ -4,8 +4,11 @@ import com.signature.petclinic.model.Owner;
 import com.signature.petclinic.repository.OwnerRepository;
 import com.signature.petclinic.services.OwnerService;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -39,6 +42,18 @@ public class OwnerJpaService implements OwnerService {
   public Set<Owner> findAll() {
     return StreamSupport.stream(ownerRepository.findAll().spliterator(), false)
       .collect(Collectors.toSet());
+  }
+
+  @Override
+  public List<Owner> findAllByLastNameLike(String lastName) {
+    lastName = lastName == null ? "" : lastName;
+    return ownerRepository.findAllByLastNameStartsWith(lastName);
+  }
+
+  @Override
+  public Page<Owner> searchAllByLastNameLike(String lastName, Pageable pageable) {
+    lastName = lastName == null ? "" : lastName;
+    return ownerRepository.searchAllByLastNameStartsWith(lastName, pageable);
   }
 
   @Override

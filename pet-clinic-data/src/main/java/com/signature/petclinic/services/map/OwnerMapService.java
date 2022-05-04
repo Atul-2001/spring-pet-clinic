@@ -6,9 +6,15 @@ import com.signature.petclinic.services.OwnerService;
 import com.signature.petclinic.services.PetService;
 import com.signature.petclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Profile({"default", "map"})
@@ -63,6 +69,20 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
   }
 
   @Override
+  public List<Owner> findAllByLastNameLike(String lastName) {
+    return findAll().stream()
+      .filter(owner -> StringUtils.startsWithIgnoreCase(owner.getLastName(), lastName))
+      .collect(Collectors.toList());
+  }
+
+  @Override
+  public Page<Owner> searchAllByLastNameLike(String lastName, Pageable pageable) {
+    lastName = lastName == null ? "" : lastName;
+    List<Owner> owners = findAllByLastNameLike(lastName);
+    return new PageImpl<>(owners, pageable, owners.size());
+  }
+
+  @Override
   public void deleteById(Long id) {
     super.deleteById(id);
   }
@@ -71,5 +91,4 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
   public void delete(Owner entity) {
     super.delete(entity);
   }
-
 }

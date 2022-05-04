@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{components/layout :: layout (~{::body}, 'home')}" xmlns:th="http://www.thymeleaf.org">
+
 <body>
-<!--    <h1 th:text="'Welcome to Pet Clinic Home Page'">Index Page</h1>-->
-<h2 th:text="#{welcome}">Welcome</h2>
-<div class="row">
-    <div class="col-md-12">
-        <img class="img-responsive" src="../static/assets/images/pets.png" th:src="@{/assets/images/pets.png}"/>
+    <!--    <h1 th:text="'Welcome to Pet Clinic Home Page'">Index Page</h1>-->
+    <h2 th:text="#{welcome}">Welcome</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <img class="img-responsive" src="../static/assets/images/pets.png" th:src="@{/assets/images/pets.png}" />
+        </div>
     </div>
-</div>
 </body>
+
 </html>

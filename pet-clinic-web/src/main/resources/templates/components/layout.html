@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" th:fragment="layout (template, menu)" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -11,76 +12,79 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" th:href="@{/assets/css/pet-clinic.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/pet-clinic.css}" />
     <title>PetClinic :: a Spring Framework demonstration</title>
 </head>
+
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" th:href="@{/}"><span></span></a>
-            <button class="navbar-toggle" data-target="#main-navbar" data-toggle="collapse" type="button">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}"><span></span></a>
+                <button class="navbar-toggle" data-target="#main-navbar" data-toggle="collapse" type="button">
                     <span class="sr-only">
                         <os-p>Toggle navigation</os-p>
                     </span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="main-navbar">
+                <ul class="nav navbar-nav navbar-right" th:remove="all">
+                    <li class="active" th:class="${active == menu ? 'active' : ''}"
+                        th:fragment="menuItem (link,active,title,glyph,text)">
+                        <a th:href="@{__${link}__}" th:title="${title}">
+                            <span aria-hidden="true" class="glyphicon glyphicon-home"
+                                th:class="'glyphicon  glyphicon-'+${glyph}"></span>
+                            <span th:text="${text}">Template</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li th:replace="::menuItem ('/','home','home page','home','Home')">
+                        <span aria-hidden="true" class="glyphicon glyphicon-home"></span>
+                        <span>Home</span>
+                    </li>
+
+                    <li th:replace="::menuItem ('/owners/search','owners','find owners','search','Find owners')">
+                        <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
+                        <span>Find owners</span>
+                    </li>
+
+                    <li th:replace="::menuItem ('/vets','vets','veterinarians','th-list','Veterinarians')">
+                        <span aria-hidden="true" class="glyphicon glyphicon-th-list"></span>
+                        <span>Veterinarians</span>
+                    </li>
+
+                    <li
+                        th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
+                        <span aria-hidden="true" class="glyphicon glyphicon-warning-sign"></span>
+                        <span>Error</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-collapse collapse" id="main-navbar">
-            <ul class="nav navbar-nav navbar-right" th:remove="all">
-                <li class="active" th:class="${active == menu ? 'active' : ''}"
-                    th:fragment="menuItem (link,active,title,glyph,text)">
-                    <a th:href="@{__${link}__}" th:title="${title}">
-                        <span aria-hidden="true" class="glyphicon glyphicon-home"
-                              th:class="'glyphicon  glyphicon-'+${glyph}"></span>
-                        <span th:text="${text}">Template</span>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li th:replace="::menuItem ('/','home','home page','home','Home')">
-                    <span aria-hidden="true" class="glyphicon glyphicon-home"></span>
-                    <span>Home</span>
-                </li>
-
-                <li th:replace="::menuItem ('/owners/find','owners','find owners','search','Find owners')">
-                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
-                    <span>Find owners</span>
-                </li>
-
-                <li th:replace="::menuItem ('/vets','vets','veterinarians','th-list','Veterinarians')">
-                    <span aria-hidden="true" class="glyphicon glyphicon-th-list"></span>
-                    <span>Veterinarians</span>
-                </li>
-
-                <li th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
-                    <span aria-hidden="true" class="glyphicon glyphicon-warning-sign"></span>
-                    <span>Error</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="container xd-container">
-        <th:block th:include="${template}"/>
-        <br><br>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <img alt="Sponsored by Pivotal"
-                         src="../../static/assets/images/spring-pivotal-logo.png" th:src="@{/assets/images/spring-pivotal-logo.png}"/>
+    </nav>
+    <div class="container-fluid">
+        <div class="container xd-container">
+            <th:block th:include="${template}" />
+            <br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img alt="Sponsored by Pivotal" src="../../static/assets/images/spring-pivotal-logo.png"
+                            th:src="@{/assets/images/spring-pivotal-logo.png}" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
+
 </html>

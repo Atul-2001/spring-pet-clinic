@@ -59,4 +59,9 @@ public class Pet extends BaseEntity {
     this.visits.add(visit);
     return this;
   }
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }
