@@ -2,6 +2,8 @@
 
 <body>
 
+    <!--/*@thymesVar id="owner" type="com.signature.petclinic.model.Owner"*/-->
+
     <h2>Owner</h2>
     <form class="form-horizontal" id="add-owner-form" method="post" th:object="${owner}">
         <div class="form-group has-feedback">
@@ -14,8 +16,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-primary" th:text="${text}"
-                        th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-                        type="submit">Add Owner</button>
+                    th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'" type="submit">Add Owner</button>
             </div>
         </div>
     </form>
