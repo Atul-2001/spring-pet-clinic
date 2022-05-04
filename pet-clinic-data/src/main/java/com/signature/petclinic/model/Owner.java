@@ -35,6 +35,42 @@ public class Owner extends Person {
     this.pets = new HashSet<>();
   }
 
+  public void addPet(Pet pet) {
+    if (pet.isNew()) {
+      getPets().add(pet);
+    }
+  }
+
+  public Pet getPet(String name) {
+    return getPet(name, false);
+  }
+
+  public Pet getPet(Long id) {
+    for (Pet pet : getPets()) {
+      if (!pet.isNew()) {
+        Long compId = pet.getId();
+        if (compId.equals(id)) {
+          return pet;
+        }
+      }
+    }
+    return null;
+  }
+
+  public Pet getPet(String name, boolean ignoreNew) {
+    name = name.toLowerCase();
+    for (Pet pet : getPets()) {
+      if (!ignoreNew || !pet.isNew()) {
+        String compName = pet.getName();
+        compName = compName == null ? "" : compName.toLowerCase();
+        if (compName.equals(name)) {
+          return pet;
+        }
+      }
+    }
+    return null;
+  }
+
   @Builder
   public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
     super(id, firstName, lastName);
