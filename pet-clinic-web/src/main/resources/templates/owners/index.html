@@ -4,7 +4,7 @@
 
 <body>
   <!--/*@thymesVar id="owner" type="com.signature.petclinic.model.Owner"*/-->
-  <!--/*@thymesVar id="searchResult" type="org.springframework.data.domain.Page<Owner>"*/-->
+  <!--/*@thymesVar id="searchResult" type="org.springframework.data.domain.Page<com.signature.petclinic.model.Owner>"*/-->
   <h2>Owners</h2>
   <table class="table table-striped" id="owners">
     <thead>
@@ -19,36 +19,37 @@
     <tbody>
       <tr th:each="owner : ${searchResult.getContent()}">
         <td>
-          <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}" />
+          <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"></a>
         </td>
-        <td th:text="${owner.address}" />
-        <td th:text="${owner.city}" />
-        <td th:text="${owner.telephone}" />
-        <td><span th:text="${#strings.listJoin(owner.pets, ', ')}" /></td>
+        <td th:text="${owner.address}"></td>
+        <td th:text="${owner.city}"></td>
+        <td th:text="${owner.telephone}"></td>
+        <td><span th:text="${#strings.listJoin(owner.pets, ', ')}"></span></td>
       </tr>
     </tbody>
   </table>
 
-  <nav aria-label="Page navigation">
+  <div th:if="${searchResult.getTotalPages() > 1}">
+    <nav aria-label="Page navigation">
       <ul class="pagination d-flex justify-content-center">
-          <li th:class="${searchResult.isFirst()} ? 'page-item disabled' : 'page-item'">
-              <span th:if="${searchResult.isFirst()}">Previous</span>
-              <a th:if="${not searchResult.isFirst()}" class="page-link"
-                 th:href="@{/owners/(page=0)}">Previous</a>
-          </li>
-          <li th:each="pageNo : ${#numbers.sequence(0, searchResult.getTotalPages()-1)}"
-              th:class="${pageNo == searchResult.getNumber()} ? 'page-item active' : 'page-item'">
-              <a class="page-link" th:href="@{/owners/(page=${pageNo})}">
-                  <span th:text="${pageNo} + 1">1</span>
-              </a>
-          </li>
-          <li th:class="${searchResult.isLast()}? 'page-item disabled' : 'page-item'">
-              <span th:if="${searchResult.isLast()}">Next</span>
-              <a th:if="${not searchResult.isLast()}" class="page-link"
-                 th:href="@{/owners/(page=${searchResult.getTotalPages()-1})}">Next</a>
-          </li>
+        <li th:class="${searchResult.isFirst()} ? 'page-item disabled' : 'page-item'">
+          <span th:if="${searchResult.isFirst()}">Previous</span>
+          <a th:if="${not searchResult.isFirst()}" class="page-link" th:href="@{/owners/(page=0)}">Previous</a>
+        </li>
+        <li th:each="pageNo : ${#numbers.sequence(0, searchResult.getTotalPages()-1)}"
+          th:class="${pageNo == searchResult.getNumber()} ? 'page-item active' : 'page-item'">
+          <a class="page-link" th:href="@{/owners/(page=${pageNo})}">
+            <span th:text="${pageNo} + 1">1</span>
+          </a>
+        </li>
+        <li th:class="${searchResult.isLast()}? 'page-item disabled' : 'page-item'">
+          <span th:if="${searchResult.isLast()}">Next</span>
+          <a th:if="${not searchResult.isLast()}" class="page-link"
+            th:href="@{/owners/(page=${searchResult.getTotalPages()-1})}">Next</a>
+        </li>
       </ul>
-  </nav>
+    </nav>
+  </div>
 </body>
 
 </html>

@@ -5,8 +5,12 @@ import com.signature.petclinic.model.Vet;
 import com.signature.petclinic.services.SpecialityService;
 import com.signature.petclinic.services.VetService;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 @Service
@@ -44,6 +48,12 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
   @Override
   public Set<Vet> findAll() {
     return super.findAll();
+  }
+
+  @Override
+  public Page<Vet> findAll(Pageable pageable) {
+    Set<Vet> vets = findAll();
+    return new PageImpl<>(new ArrayList<>(vets), pageable, vets.size());
   }
 
   @Override

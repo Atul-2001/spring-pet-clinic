@@ -4,6 +4,8 @@ import com.signature.petclinic.model.Vet;
 import com.signature.petclinic.repository.VetRepository;
 import com.signature.petclinic.services.VetService;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -34,6 +36,11 @@ public class VetJpaService implements VetService {
   public Set<Vet> findAll() {
     return StreamSupport.stream(vetRepository.findAll().spliterator(), false)
       .collect(Collectors.toSet());
+  }
+
+  @Override
+  public Page<Vet> findAll(Pageable pageable) {
+    return vetRepository.findAll(pageable);
   }
 
   @Override

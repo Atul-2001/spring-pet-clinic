@@ -1,6 +1,7 @@
 package com.signature.petclinic.controller;
 
 import com.signature.petclinic.services.VetService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ public class VetController {
   }
 
   @GetMapping({"", "/", "/index", "/index.html"})
-  public String index(Model model) {
-    model.addAttribute("vets", vetService.findAll());
+  public String index(Model model, Pageable pageable) {
+    model.addAttribute("searchResult", vetService.findAll(pageable));
     return "vets/index";
   }
 
