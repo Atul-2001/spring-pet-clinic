@@ -3,6 +3,7 @@ package com.signature.petclinic.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.Assert;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -70,6 +71,17 @@ public class Owner extends Person {
       }
     }
     return null;
+  }
+
+  public void addVisit(Long petId, Visit visit) {
+    Assert.notNull(petId, "Pet identifier must not be null!");
+    Assert.notNull(visit, "Visit must not be null!");
+
+    Pet pet = getPet(petId);
+
+    Assert.notNull(pet, "Invalid Pet identifier!");
+
+    pet.addVisit(visit);
   }
 
   @Builder
