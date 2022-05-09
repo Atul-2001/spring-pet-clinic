@@ -24,4 +24,9 @@ public class Speciality extends BaseEntity {
     super(id);
     this.description = description;
   }
+
+  @Override
+  public String toString() {
+    return this.description;
+  }
 }
